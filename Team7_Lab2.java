@@ -20,7 +20,6 @@ public class Team7_Lab2 {
         boolean playGame = true;
 
         while (playGame){
-            // ======== Select chess piece ========
             ChessPieceType pieceType = null;
             while (pieceType == null){
                 System.out.println("Select a chess piece (PAWN, ROOK, KNIGHT, BISHOP, QUEEN, KING): ");
@@ -60,7 +59,6 @@ public class Team7_Lab2 {
                 }
             }
 
-            // ======== Current position ========
             char currentColumn;
             int currentRow;
 
@@ -78,8 +76,7 @@ public class Team7_Lab2 {
                     System.out.println("Invalid position.");
                 }
             }
-
-            // ======== Create piece object ========
+            
             Object piece = null;
 
             switch (pieceType){
@@ -103,7 +100,6 @@ public class Team7_Lab2 {
                     break;
             }
 
-            // ======== Target position loop ========
             boolean verifyTargetPosition = true;
 
             while (verifyTargetPosition){
@@ -128,7 +124,6 @@ public class Team7_Lab2 {
                     }
                 }
 
-                // ======== Verify move ========
                 boolean validMove = false;
 
                 switch (pieceType){
@@ -154,7 +149,7 @@ public class Team7_Lab2 {
 
                 if (validMove){
                     System.out.println("Valid move!");
-                    // original position stays unchanged
+                    
                 }
                 else{
                     System.out.println("Invalid move for this piece.");
@@ -167,7 +162,6 @@ public class Team7_Lab2 {
                 }
             }
 
-            // ======== Ask for new piece ========
             System.out.print("Do you want to select another piece? (yes/no): ");
             String choicePiece = scanner.next().toLowerCase();
             if (!choicePiece.equals("yes")){
