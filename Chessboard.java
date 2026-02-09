@@ -3,7 +3,7 @@ public class Chessboard {
     public static int MIN_ROW = 1;
 
 
-    public ChessBoard(){
+    public Chessboard(){
 
     }
 
