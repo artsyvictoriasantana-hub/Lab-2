@@ -1,12 +1,26 @@
 /* Fausto Lozano, Marisol Anaya Molina, Victoria Santana 
 [CS 3331] Lab 1: Programming skills assessment
 
+This program checks whether a chess piece chosen by a user can make a valid move from a chosen starting position to another chosen target position. 
+The user selects a chess piece and sets its initial location, then chooses a target location to move to.
+The system determines and displays whether the move is valid or invalid.
+The user can tezt additional target positions using the same starting position, or choose a different chess piece and begin again.
+
+
 Change log:
 
 01/30/2026:
 Fausto Lozano
 - Created main file
 
+02/08/2026:
+Victoria Santana
+- Added user input for selecting a chess piece, color, and starting position
+- Implemented validation for board boundaries and invalid inputs
+- Added move verification logic for all chess pieces
+- Enabled repeated target position checks for the same piece
+- Added option to restart with a new piece or exit the program
+- Debug syntax errors
 
 */
 import java.util.Scanner;
