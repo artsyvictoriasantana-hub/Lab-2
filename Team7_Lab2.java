@@ -9,10 +9,173 @@ Fausto Lozano
 
 
 */
+import java.util.Scanner;
 
 public class Team7_Lab2 {
     public static void main(String[] args){
 
-    }
+        Scanner scanner = new Scanner(System.in);
+        Chessboard board = new Chessboard();
 
+        boolean playGame = true;
+
+        while (playGame){
+            // ======== Select chess piece ========
+            ChessPieceType pieceType = null;
+            while (pieceType == null){
+                System.out.println("Select a chess piece (PAWN, ROOK, KNIGHT, BISHOP, QUEEN, KING): ");
+                String input = scanner.next().toUpperCase();
+
+                ChessPieceType[] pieces = ChessPieceType.values();
+
+                for (int i = 0; i < pieces.length; i++){
+                    if (pieces[i].name().equals(input)){
+                        pieceType = pieces[i];
+                        break;
+                    }
+                }
+
+                if (pieceType == null){
+                    System.out.println("Invalid chess piece. Try again.");
+                }
+            }
+
+            // ======== Select color ========
+            Color color = null;
+            while (color == null){
+                System.out.println("Select a color (WHITE or BLACK): ");
+                String input = scanner.next().toUpperCase();
+
+                Color[] colors = Color.values();
+
+                for (int i = 0; i < colors.length; i++){
+                    if (colors[i].name().equals(input)){
+                        color = colors[i];
+                        break;
+                    }
+                }
+
+                if (color == null){
+                    System.out.println("Invalid color. Try again.");
+                }
+            }
+
+            // ======== Current position ========
+            char currentColumn;
+            int currentRow;
+
+            while (true){
+                System.out.println("Enter current column (a-h): ");
+                currentColumn = scanner.next().toLowerCase().charAt(0);
+
+                System.out.println("Enter current row (1-8): ");
+                currentRow = scanner.nextInt();
+
+                if(board.withinChessboard(currentColumn, currentRow)){
+                    break;
+                }
+                else{
+                    System.out.println("Invalid position.");
+                }
+            }
+
+            // ======== Create piece object ========
+            Object piece = null;
+
+            switch (pieceType){
+                case PAWN:
+                    piece = new Pawn(color, currentColumn, currentRow);
+                    break;
+                case ROOK:
+                    piece = new Rook(color, currentColumn, currentRow);
+                    break;
+                case KNIGHT:
+                    piece = new Knight(color, currentColumn, currentRow);
+                    break;
+                case BISHOP:
+                    piece = new Bishop(color, currentColumn, currentRow);
+                    break;
+                case QUEEN:
+                    piece = new Queen(color, currentColumn, currentRow);
+                    break;
+                case KING:
+                    piece = new King(color, currentColumn, currentRow);
+                    break;
+            }
+
+            // ======== Target position loop ========
+            boolean verifyTargetPosition = true;
+
+            while (verifyTargetPosition){
+                char targetColumn = 0;
+                int targetRow = 0;
+
+                while(true){
+                    System.out.println("Enter target column (a-h): ");
+                    targetColumn = scanner.next().toLowerCase().charAt(0);
+
+                    System.out.println("Enter target row (1-8): ");
+                    targetRow = scanner.nextInt();
+
+                    if (!board.withinChessboard(targetColumn, targetRow)){
+                        System.out.println("Target position is out of bounds.");
+                    }
+                    else if (targetColumn == currentColumn && targetRow == currentRow){
+                        System.out.println("Target position must be different from current position.");
+                    }
+                    else{
+                        break;
+                    }
+                }
+
+                // ======== Verify move ========
+                boolean validMove = false;
+
+                switch (pieceType){
+                    case PAWN:
+                        validMove = ((Pawn) piece).verifyTarget(targetColumn, targetRow);
+                        break;
+                    case ROOK:
+                        validMove = ((Rook) piece).verifyTarget(targetColumn, targetRow);
+                        break;
+                    case KNIGHT:
+                        validMove = ((Knight) piece).verifyTarget(targetColumn, targetRow);
+                        break;
+                    case BISHOP:
+                        validMove = ((Bishop) piece).verifyTarget(targetColumn, targetRow);
+                        break;
+                    case QUEEN:
+                        validMove = ((Queen) piece).verifyTarget(targetColumn, targetRow);
+                        break;
+                    case KING:
+                        validMove = ((King) piece).verifyTarget(targetColumn, targetRow);
+                        break;
+                }
+
+                if (validMove){
+                    System.out.println("Valid move!");
+                    // original position stays unchanged
+                }
+                else{
+                    System.out.println("Invalid move for this piece.");
+                }
+
+                System.out.print("Do you want to try another target position with the same piece? (yes/no): ");
+                String choiceTarget = scanner.next().toLowerCase();
+                if (!choiceTarget.equals("yes")){
+                    verifyTargetPosition = false;
+                }
+            }
+
+            // ======== Ask for new piece ========
+            System.out.print("Do you want to select another piece? (yes/no): ");
+            String choicePiece = scanner.next().toLowerCase();
+            if (!choicePiece.equals("yes")){
+                playGame = false;
+            }
+        }
+
+        System.out.println("Game terminated.");
+        scanner.close();
+    }
 }
