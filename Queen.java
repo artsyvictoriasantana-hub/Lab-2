@@ -38,7 +38,6 @@ public class Queen {
     }
 
     public boolean verifyTarget(char column, int row){
-        return column == row || column == this.column || row == this.row;
-
+        return column == this.column || row == this.row || Math.abs(column - this.column) == Math.abs(row - this.row);
     }
 }
