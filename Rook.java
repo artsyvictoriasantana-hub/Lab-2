@@ -38,6 +38,6 @@ public class Rook {
     }
 
     public boolean verifyTarget(char column, int row){
-        return this.column == column || this.row == row;
+        return (column != this.column || row != this.row) && (this.column == column || this.row == row);
     }
 }
