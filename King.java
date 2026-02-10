@@ -38,7 +38,7 @@ public class King {
     }
 
     public boolean verifyTarget(char column, int row){
-        return Math.abs(column - this.column) <= 1 && Math.abs(row - this.row) <= 1;
+        return (column != this.column || row != this.row) && Math.abs(column - this.column) <= 1 && Math.abs(row - this.row) <= 1;
 
     }
 }
