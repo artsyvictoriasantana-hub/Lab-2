@@ -39,9 +39,9 @@ public class Pawn {
 
     public boolean verifyTarget(char column, int row){
         if (this.color == Color.WHITE) {
-            return this.column == column && this.row == row + 1;
+            return this.column == column && row == this.row + 1;
         } else {
-            return this.column == column && this.row == row - 1;
+            return this.column == column && row == this.row - 1;
         }
     }
 }
