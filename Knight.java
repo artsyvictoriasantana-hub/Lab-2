@@ -38,6 +38,9 @@ public class Knight {
     }
 
     public boolean verifyTarget(char column, int row){
-        return (column == 2 && row == 1) || (column == 1 && row == 2);
+        int colDiff = Math.abs(column - this.column);
+        int rowDiff = Math.abs(row - this.row);
+
+        return (colDiff == 2 && rowDiff == 1) || (colDiff == 1 && rowDiff == 2);
     }
 }
