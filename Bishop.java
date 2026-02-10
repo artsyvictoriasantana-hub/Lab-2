@@ -38,6 +38,6 @@ public class Bishop {
     }
 
     public boolean verifyTarget(char column, int row){
-        return Math.abs(column - this.column) == Math.abs(row - this.row);
+        return column != this.column && Math.abs(column - this.column) == Math.abs(row - this.row);
     }
 }
